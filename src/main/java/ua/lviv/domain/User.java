@@ -7,12 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-//@Entity
-//@Table(name = "user")
+@Entity
+@Table(name = "user")
 public class User {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String email;
 	private String firstName;
@@ -20,7 +19,7 @@ public class User {
 	private String password;
 	private String passwordConfirm;
 
-//	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
 	public User() {

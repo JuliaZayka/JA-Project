@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "periodical")
+@Entity
+@Table(name = "periodical")
 public class Periodical {
 	
-//	@Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-//	@Column
+	@Column
 	private String name; 
 	
-//	@Column
+	@Column
 	private String description;
 	
-//	@Column
+	@Column
 	private Double price;
 	
-//	@Lob
+	@Lob
 	private String encodedImage;
 
 	public Periodical() {
