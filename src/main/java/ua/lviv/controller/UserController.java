@@ -7,9 +7,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import ua.lviv.dao.UserRepository;
+import ua.lviv.domain.Periodical;
 import ua.lviv.domain.User;
+import ua.lviv.service.PeriodicalsService;
 import ua.lviv.service.UserService;
 
 @Controller
@@ -17,6 +20,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PeriodicalsService periodicalsService;
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -50,9 +55,15 @@ public class UserController {
     }
 
     @RequestMapping(value ="/home", method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "home";
-    }
+	public ModelAndView welcome() {
+		ModelAndView map = new ModelAndView("home");
+		map.addObject("periodicals", periodicalsService.getAllPeriodicals());
+
+		return map;
+	}
     
-    
+    @RequestMapping(value ="/create-periodical", method = RequestMethod.GET)
+    public ModelAndView createPeriodical() {
+        return new ModelAndView("createPeriodical", "periodical", new Periodical());
+    }  
 }
