@@ -1,4 +1,4 @@
-%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -16,15 +16,15 @@
 		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
 			<h3 class="w3-bar-item">Menu</h3>
 			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
-				href="/create-periodical" class="w3-bar-item w3-button">Create
-				periodical</a> <a href="/buckets" class="w3-bar-item w3-button">Bucket</a>
+				href="/create-periodical" class="w3-bar-item w3-button">
+				Create new card</a> <a href="/buckets" class="w3-bar-item w3-button">All students</a>
 		</div>
 
 
 		<!-- Page Content -->
 		<div style="margin-left: 10%">
 			<div class="w3-container w3-teal">
-				<h1>Create new Periodical</h1>
+				<h1>Create new card</h1>
 			</div>
 			<div class="w3-container">
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -38,36 +38,33 @@
 					</h2>
 				</c:if>
 
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>First_Name</th>
+							<th>Last_Name</th>
+							<th>Age</th>
+							<th>Image</th>
+							<th>Purchase Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="bucket" items="${bucketItems}">
+							<tr>
+								<td>${bucket.id}</td>
+								<td>${bucket.periodical.name}</td>
+								<td>${bucket.periodical.description}</td>
+								<td>${bucket.periodical.price}</td>
+								<td><img src="data:image/jpg;base64,${bucket.periodical.encodedImage}" alt="image" style="width: 10%"></td>
+								<td>${bucket.purchaseDate}</td>
+								<td><a href="bucket?id= ${bucket.id}">delete</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 
-
-
-				<form:form method="POST" action="${contextPath}/addPeriodical" 
-				 enctype="multipart/form-data">
-				<table>
-						<tr>
-							<td>First_Name</td>
-							<td><input type="text" name="name" /></td>
-						</tr>
-						<tr>
-							<td>Last_Name</td>
-							<td><input type="text" name="description" /></td>
-						</tr>
-						<tr>
-							<td>Age</td>
-							<td><input type="number" name="price" /></td>
-						</tr>
-						<tr>
-							<td>Select an image to upload</td>
-							<td><input type="file" name="image" /></td>
-						</tr>
-
-						<tr>
-							<td><input type="submit" value="Submit" /></td>
-						</tr>
-					</table>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</form:form>	
 
 			</div>
 
@@ -75,10 +72,5 @@
 
 
 	</div>
-	<!-- /container -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
 </body>
 </html>

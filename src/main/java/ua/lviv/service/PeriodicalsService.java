@@ -1,6 +1,6 @@
 package ua.lviv.service;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,8 @@ public class PeriodicalsService {
 		return periodicalRepository.findAll();
 	}
 	
-	
+	public Periodical findById(Integer id) {
+		return periodicalRepository.findById(id).get();
+	}
 	
 }

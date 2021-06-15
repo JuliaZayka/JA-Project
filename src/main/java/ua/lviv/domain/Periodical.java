@@ -26,6 +26,7 @@ public class Periodical {
 	private Double price;
 	
 	@Lob
+	//private byte [] image;
 	private String encodedImage;
 
 	public Periodical() {
