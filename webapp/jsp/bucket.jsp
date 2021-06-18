@@ -1,6 +1,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +18,17 @@
 		<!-- Sidebar -->
 		<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 10%">
 			<h3 class="w3-bar-item">Menu</h3>
-			<a href="/home" class="w3-bar-item w3-button">Home</a> <a
-				href="/create-periodical" class="w3-bar-item w3-button">
-				Create new card</a> <a href="/buckets" class="w3-bar-item w3-button">All students</a>
+			<a href="/home" class="w3-bar-item w3-button">Home</a> 
+			
+			<security:authorize access="hasRole('ROLE_USER')">
+			<a href="/create-periodical" class="w3-bar-item w3-button">
+				       Create new card</a>
+		     </security:authorize>
+			
+			<security:authorize access="hasRole('ROLE_ADMIN')">	
+			 <a href="/buckets" class="w3-bar-item w3-button">All students</a>
+             </security:authorize>		
 		</div>
-
 
 		<!-- Page Content -->
 		<div style="margin-left: 10%">
